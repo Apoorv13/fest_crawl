@@ -2,7 +2,7 @@ import scrapy
 
 
 class AuthorSpider(scrapy.Spider):
-    name = 'knowafest'
+    name = 'know'
 
     start_urls = ['http://www.knowafest.com/college-fests/upcomingfests']
 
@@ -21,11 +21,9 @@ class AuthorSpider(scrapy.Spider):
     def parse_author(self, response):
         def extract_with_css(query):
             return response.css(query).extract_first().strip()
-        
 
         yield {
-            'name': extract_with_css('.headline.h2::text'),
+           'name': extract_with_css('.headline.h2::text'),
             'date': extract_with_css('dd.fa-fa-calendar::text'),
             'mail': extract_with_css('.pull-right.h4::text'),
-            
         }
